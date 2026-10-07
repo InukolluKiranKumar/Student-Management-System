@@ -1,0 +1,61 @@
+{
+  "students": [
+    {
+      "rollno": "2",
+      "name": "kiran",
+      "email": "kiran@gmail.com",
+      "address": "2-44,marripudi",
+      "id": "pcNmidSj5DY"
+    },
+    {
+      "rollno": "1",
+      "name": "srinivas",
+      "email": "srinu@gmail.com",
+      "address": "marripudi",
+      "id": "jTZpoyajWG4"
+    },
+    {
+      "rollno": "7",
+      "name": "samatha",
+      "email": "samatha@gmail.com",
+      "address": "singarabotlapalem",
+      "id": "yFGk_r61qJ0"
+    },
+    {
+      "rollno": "4",
+      "name": "krishnaveni",
+      "email": "k@gmail.com",
+      "address": "duggireddypalem",
+      "id": "iMeequmeQs8"
+    },
+    {
+      "rollno": "5",
+      "name": "ramesh",
+      "email": "r@gmail.com",
+      "address": "america",
+      "id": "XvDuOBuDB94"
+    },
+    {
+      "rollno": "6",
+      "name": "suresh",
+      "email": "s@gmail.com",
+      "address": "australia",
+      "id": "zHbHKHuwr-s"
+    },
+    {
+      "rollno": "3",
+      "name": "katherine",
+      "email": "k@gmail.com",
+      "address": "marripudi",
+      "id": "VFxectK9k9M"
+    },
+    {
+      "rollno": "8",
+      "name": "josephine",
+      "email": "j@gmail.com",
+      "address": "australia",
+      "id": "IGjQkhUeQOU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
