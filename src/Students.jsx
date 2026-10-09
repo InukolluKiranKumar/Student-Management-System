@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Dashboard from './Dashboard.jsx'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Routes, Route, Link, useNavigate, NavLink } from 'react-router-dom'
 
 
 function Students(){
@@ -10,6 +11,8 @@ function Students(){
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
+
+    const navigate = useNavigate();
 
     const [search, setSearch] = useState("");
 
@@ -75,6 +78,14 @@ function Students(){
         getStudents();
     }, [])
 
+    const clearForm = () => {
+    setRollno("");
+    setName("");
+    setEmail("");
+    setAddress("");
+    setId(null);
+};
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         if (!rollno.trim() || !name.trim() || !email.trim() || !address.trim()) {
@@ -101,11 +112,8 @@ function Students(){
                // getStudents();
             }
             getStudents();
-            setRollno("");
-            setName("");
-            setEmail("");
-            setAddress("");
-            setId(null);
+            clearForm();
+            navigate("/students");
         }
         catch(e){
             console.log(e)
@@ -129,11 +137,34 @@ function Students(){
         setEmail(student.email);
         setAddress(student.address)
         setId(student.id);
+        navigate("/students/add"); 
     }
 
     return(
-        
-        <div className="container mt-4">
+        <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark px-3">
+            <span className="navbar-brand">Student Management</span>
+            <div className="navbar-nav">
+
+                <NavLink className="nav-link" to="/">Home</NavLink>
+                
+                <NavLink className="nav-link" to="/students">Students</NavLink>
+                
+                <NavLink className="nav-link" to="/students/add" onClick={clearForm}>Add Student</NavLink>
+            
+            </div>
+            
+        </nav>
+        <Routes>
+        <Route path="/" element={
+            <div className="container mt-4">
+            <h1 className="h1 mb-4">Student Management System</h1>
+            
+            <Dashboard students={student} />
+            </div>
+        } />
+            <Route path="/students" element={
+                <div className="container mt-4">
             <h1 className="h1 mb-4">Student Management System</h1>
             
             <Dashboard students={student} />
@@ -143,29 +174,10 @@ function Students(){
                     value={search} onChange = {(e) => {setSearch(e.target.value); setCurrentPage(1);}}
                     />
             
-            <form onSubmit={handleSubmit} classname="mb-4">
-                <input className="form-control mb-1"
-                placeholder="Enter your Roll No" onChange={(e)=>setRollno(e.target.value)} value={rollno}/>
-                <br />
-                <input className="form-control mb-1"
-                placeholder="Enter your Name" onChange={(e)=>setName(e.target.value)} value={name}/>
-                <br />
-                <input className="form-control mb-1"
-                placeholder="Enter your Email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
-                <br />
-                <input className="form-control mb-1"
-                placeholder="Enter your Address" onChange={(e)=>setAddress(e.target.value)} value={address}/>
-                <br />
-                <button className="btn btn-primary form-control mb-2"
-                type="submit">SUBMIT</button>
-                
-                <br />
-                <br />
-            </form>
-            <p className="text-muted"
-            >**Click column headings of each section for SORTING</p>
-            <table className="table table-bordered table-hover"
-            >
+            
+                    
+            <p className="text-muted">**Click column headings of each section for SORTING</p>
+            <table className="table table-bordered table-hover">
                 <thead className="table-dark">
                     <tr>
                         <th onClick={() => handleSort("rollno")}>Roll No</th>
@@ -214,7 +226,34 @@ function Students(){
             </div>
 
         </div>
+            }/>
+
+             <Route path="/students/add" element={
+                <div className="container mt-4">
+                    <h2>{id == null ? "Add Student" : "Edit Student"}</h2>
+                    <form onSubmit={handleSubmit} className="mb-4">
+                    <input className="form-control mb-1"
+                    placeholder="Enter your Roll No" onChange={(e)=>setRollno(e.target.value)} value={rollno}/>
+                    <br />
+                    <input className="form-control mb-1"
+                    placeholder="Enter your Name" onChange={(e)=>setName(e.target.value)} value={name}/>
+                    <br />
+                    <input className="form-control mb-1"
+                    placeholder="Enter your Email" onChange={(e)=>setEmail(e.target.value)} value={email}/>
+                    <br />
+                    <input className="form-control mb-1"
+                    placeholder="Enter your Address" onChange={(e)=>setAddress(e.target.value)} value={address}/>
+                    <br />
+                    <button className="btn btn-primary form-control mb-2"
+                    type="submit">SUBMIT</button>
+                    </form>
+                    </div>
+            }/>
             
+        <Route path="*" element={<h2>404 - Page Not Found</h2>}/>
+        </Routes>  
+    </div>
+        
     )
 
 }
