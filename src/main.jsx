@@ -26,6 +26,7 @@ import { createRoot } from 'react-dom/client'
 //import App from './App17.jsx'
 //import App from './App20.jsx'
 //import AxiosCrud from './AxiosCrud.jsx'
+import {BrowserRouter} from 'react-router-dom'
 import Students from './Students.jsx'
 
 
@@ -33,7 +34,9 @@ import Students from './Students.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     
-    <Students />
+    <BrowserRouter>
+      <Students />
+    </BrowserRouter>
     
   </StrictMode>,
 )
